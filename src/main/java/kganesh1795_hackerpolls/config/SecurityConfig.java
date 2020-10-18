@@ -20,18 +20,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsService adminService;
 	
 	@Autowired
-	private AuthenticationSuccessHandler roleBasedAuthSuccessHandler;
+	private PasswordEncoder passEnc;
 	
-	@Bean
-	public PasswordEncoder passEnc() {
-		return new BCryptPasswordEncoder();
-	}
+	@Autowired
+	private AuthenticationSuccessHandler roleBasedAuthSuccessHandler;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder authMB) throws Exception {
-		authMB.userDetailsService(this.candidateService).passwordEncoder(passEnc());
+		authMB.userDetailsService(this.candidateService).passwordEncoder(this.passEnc);
 
-		authMB.userDetailsService(adminService).passwordEncoder(passEnc());
+		authMB.userDetailsService(adminService).passwordEncoder(this.passEnc);
 	}
 
 	@Override
