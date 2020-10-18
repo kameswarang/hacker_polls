@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Registration for new users">
+        <meta name="author" content="Kameswaran Ganesh">
+        
+        <title>Hacker Polls - Registration</title>
+        
+        <!-- Bootstrap core CSS -->
+        <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Custom css -->
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container w-50 h-auto p-1 mx-auto mt-3 border border-dark rounded text-center text-info">
+        	After registering, login as admin:superadmin and activate your profile for it to show up in the poll.
+        </div>
+        <div class="container w-50 h-50 p-1 mx-auto mt-3 border border-dark rounded">
+            <h3 class="text-center">Register as new candidate</h3>
+            <hr>
+            <form method="POST" th:object=${candidate} th:action="@{/register}" class="needs-validation">
+                <div class="form-group">
+                    <div class="row mt-2 mx-auto">
+                        <div class="col">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control"  id="firstName" name="firstName" placeholder="First name" required 
+                                th:field="*{firstName}"
+                                th:attrappend="class=${#fields.hasErrors('firstName') ? ' is-invalid' : ''}"></input>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}">
+                                <span th:errors="*{firstName}"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" required 
+                                th:field="*{lastName}"
+                                th:attrappend="class=${#fields.hasErrors('lastName') ? ' is-invalid' : ''}"></input>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}">
+                                <span th:errors="*{lastName}"></span>
+                            </div>                        
+                        </div>
+                    </div>
+                    <div class ="row mt-2 mx-auto">
+                        <div class="col">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required 
+                                th:field="*{username}"
+                                th:attrappend="class=${#fields.hasErrors('username') ? ' is-invalid' : ''}"></input>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}">
+                                <span th:errors="*{username}"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required 
+                                th:field="*{password}"
+                                th:attrappend="class=${#fields.hasErrors('password') ? ' is-invalid' : ''}"></input>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}">
+                                <span th:errors="*{password}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-fit-content mt-3 mx-auto">
+                        <button class="btn btn-primary btn-lg" type="submit" id="register">Register</button>
+                    </div>
+                </div>
+            </form>
+            <hr>
+            <div class="row w-fit-content mt-1 mx-auto">
+                <h5 class="text-center">or</h5>
+            </div>
+            <div class="row w-fit-content mt-1 mx-auto">
+                <button class="btn btn-secondary btn-lg" id="register"><a th:href="@{/login}" class="text-decoration-none text-white">Login</a></button>
+            </div>        
+        </div>
+        <!-- Bootstrap js -->
+        <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <!-- jQuery -->
+        <script src="/webjars/jquery/3.4.1/jquery.slim.min.js"></script>
+        <!-- Custom js -->
+        <script src="js/main.js"></script>
+    </body>
+</html>

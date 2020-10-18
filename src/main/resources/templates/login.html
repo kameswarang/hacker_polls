@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Registration for new users">
+        <meta name="author" content="Kameswaran Ganesh">
+        
+        <title>Hackerpolls - Login</title>
+        
+        <!-- Bootstrap core CSS -->
+        <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Custom css -->
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container w-25 h-50 p-1 mx-auto mt-3 border border-dark rounded">
+            <h3 class="text-center">Login for existing users</h3>
+            <hr>
+            <form method="POST" th:action="@{/login}" class="needs-validation" novalidate>
+                <div class="form-group">
+                    <div class="row w-fit-content mt-2 mx-auto" th:if="${param.registrationSuccess}">
+                        <span class="text-center text-info">Successfully registered. Use your credentials to login.</span>
+                    </div>   
+                    <div class="row w-fit-content mt-2 mx-auto" th:if="${param.error}">
+                        <span class="text-center text-warning">Unable to login. Check your username and password.</span>
+                    </div>
+                    
+                    <div class="row w-fit-content mt-2 mx-auto" th:if="${param.logout}">
+                        <span class="text-center text-info">You have been logged out.</span>
+                    </div>                    
+                    <div class="row col mt-2 mx-auto">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="testUser" required></input>
+                        <div class="invalid-feedback">Provide a username</div>
+                    </div>
+                    <div class="row col mt-2 mx-auto">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="password" required></input>
+                        <div class="invalid-feedback">Provide a password</div>
+                    </div>
+                    <div class="row w-fit-content mt-3 mx-auto">
+                        <button class="btn btn-primary btn-lg" type="submit" id="login">Login</button>
+                    </div>
+                </div>
+            </form>
+            <hr>
+            <div class="row w-fit-content mt-1 mx-auto">
+                <span class="text-center"><h5>or</h5></span>
+            </div>
+            <div class="row w-fit-content mt-1 mx-auto">
+                <button class="btn btn-secondary btn-lg"id="register"><a href="/register" class="text-decoration-none text-white">Signup</a></button>
+            </div>
+        </div>
+        <!-- Bootstrap js -->
+        <script src="webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <!-- jQuery -->
+        <script src="webjars/jquery/3.4.1/jquery.slim.min.js"></script>
+        <!-- Custom js -->
+        <script src="js/main.js"></script>
+    </body>
+</html>

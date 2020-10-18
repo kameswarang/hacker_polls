@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+        <head th:include="fragments::head(title='Hacker Polls - Admin', description='Admin dashboard')">
+    
+    </head>
+    <body>
+         <!-- Warning Modal -->
+        <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="warningModalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+              	<span class="text-danger">Are you sure you want to delete this profile?</span>
+                <br>
+                <h5 class="p-2 text-center" id="deleteProfileName"></h5>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deleteProfile()">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Navigation -->
+		<div th:replace="fragments::navigation"></div>
+        
+        <!-- Content -->
+        <div class="float-right sticky-top mr-5">
+        <button class="btn btn-primary btn-lg">
+        	<a href="/admin/profile/add" class="text-decoration-none text-white">Add new Candidate</a>
+        </button>
+        </div>
+        <div class="container">
+  			<table class="table table-bordered mx-auto my-2">
+  				<thead>
+  					<tr>
+						<th><h5 class="text-center">Name</h5></th>
+						<th><h5 class="text-center">Votes</h5></th>
+						<th><h5 class="text-center">Challenges</h5></th>
+						<th><h5 class="text-center">Expertise</h5></th>
+						<th style="width: 8%"></th>
+						<th style="width: 8%"></th>
+						<th style="width: 10%"></th>
+  					</tr>
+  				</thead>
+  				<tbody>
+  					<tr th:each="candidate: ${candidates}">
+  						<td th:text="${candidate.name}"></td>
+  						<td class="text-right" th:text="${candidate.votes}"></td>
+  						<td class="text-right" th:text="${candidate.challengesSolved}"></td>
+  						<td class="text-right" th:text="${candidate.expertiseLevel}"></td>
+  						<td class="w-fit-content"><button class="btn btn-primary float-right">
+  							<a th:href="@{/admin/profile/view(candidate=${candidate.username})}" class="text-decoration-none text-white">View</a>
+ 						</button></td>
+  						<td><button class="btn btn-primary float-right">
+  							<a th:href="@{/admin/profile/edit(candidate=${candidate.username},skills='2')}" class="text-decoration-none text-white">Edit</a>
+ 						</button></td>
+  						<td><button class="btn btn-primary float-right" th:id="${candidate.username}" th:onclick="warnDelete(event)">Delete</button></td>
+  					</tr>
+  				</tbody>
+  			</table>
+
+        </div>
+        
+        <div th:replace="fragments::javascripts"></div>
+        <!-- Axios -->
+        <script src="/webjars/axios/0.20.0/dist/axios.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+     <head th:include="fragments::head(title='Hacker Polls - Vote for your favorite hacker', description='Vote for your favorite hacker in this poll')">
+    </head>
+    <body>
+        <!-- Navigation -->
+		<div th:replace="fragments::navigation"></div>
+        
+        <!-- Content -->
+        <div class="container">
+       		<h1 class="text-center">Vote for you favorite Hacker</h1>
+	        <div class="container">
+				<canvas id="myChart"></canvas>
+	        </div>
+       		<div th:switch=${voted} class="mt-2">
+	       		<form th:case="'false'" method="POST" id="poll" th:action="@{__${#request.servletPath}__}" class="needs-validation">
+		        	<div class="form-group">
+		        		<div th:each="candidate : ${candidates}" class="border rounded w-75 mx-auto my-2 p-3">
+		        			<input type="radio" class="" style="height:1em; width:1em;" id="votedFor" name="votedFor" th:value="${candidate.username}" required></input>
+		        			<label for="votedFor" class=" ml-3">
+		        			<h3 class="d-inline" th:text="|${candidate.name}, |"></h3>
+		        			<h4 class="d-inline" th:text="|Level ${candidate.expertiseLevel}, ${candidate.challengesSolved} challenges solved|"></h4></label>
+		        			<h3 class="float-right" th:id="${candidate.username}">...</h3>
+				  			<table class="table table-bordered w-50 mx-auto my-2" th:id="|${candidate.username}Skills|">
+								<thead>
+									<tr>
+										<td><h5 class="text-center">Skill</h5></td>
+										<td><h5 class="text-center">Expertise</h5></td>
+									</tr>
+								</thead>
+				  				<tbody>
+				  					<tr th:each="skill : ${candidate.skills}">
+				  						<td th:text="${skill.name}"></td>
+				  						<td th:class="text-right" th:text="${skill.expertise}"></td>
+									</tr>
+				  				</tbody>
+				  			</table>
+			  			</div>
+			  			<div class="w-fit-content mt-4 mx-auto">
+			  				<input type="submit" class="btn btn-primary btn-lg p-2 font-weight-bold" value="VOTE"></input>
+			  			</div>
+			  			<div th:if="not ${currentUser}">
+				            <div class="row w-fit-content mt-1 mx-auto">
+				                <h5 class="text-center">or</h5>
+				            </div>
+				            <div class="row w-fit-content mt-1 mx-auto">
+				                <button class="btn btn-secondary btn-lg" id="register"><a th:href="@{/register}" class="text-decoration-none text-white">Signup for the poll</a></button>
+				            </div>
+			            </div>
+		        	</div>
+	        	</form>
+	        	<div th:case="'true'" class="w-75 mx-auto">
+	        		<h2 class="text-center">Sorry, you cannot vote as you have already voted.</h2>
+				</div>
+        	</div>
+	        </div>
+        
+        <div th:replace="fragments::javascripts"></div> 
+        <!-- Axios -->
+        <script src="/webjars/axios/0.20.0/dist/axios.min.js"></script>
+        <!-- Chart Plugin Colorscheme -->
+		<script src="/webjars/chartjs/2.9.3/Chart.bundle.min.js"></script>
+		<!-- Chart Plugin Colorscheme -->
+		<script src="/webjars/chartjs-plugin-colorschemes/0.4.0/dist/chartjs-plugin-colorschemes.min.js"></script>
+		<!-- Script to render the chart-->
+        <script src="/js/status.js"></script>
+    </body>
+</html>

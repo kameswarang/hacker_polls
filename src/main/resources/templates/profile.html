@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments::head(title='Hacker Polls - View Profile', description='View profile of an existing candidate')">
+    </head>
+    <body>
+        <!-- Navigation -->
+		<div th:replace="fragments::navigation"></div>
+        
+        <!-- Content -->
+        <div class="container">
+        	<div class="row w-50 m-auto text-center">
+        	<div class="col">
+        		<h2 th:text="${profile.name}"></h2>
+       		</div>
+        	</div>
+	        <div class="row w-50 m-auto text-center">
+        		<div class="col"><h3>Challenges Solved</h3></div>
+        		<div class="col"><h3>Expertise Level</h3></div>
+        	</div>
+        	<div class="row w-50 m-auto text-center">
+        		<div class="col"><h4 th:text="${profile.challengesSolved}"></h4></div>
+        		<div class="col"><h4 th:text="${profile.expertiseLevel}"></h4></div>        		
+        	</div>
+   	
+  			<table class="table table-bordered w-50 mx-auto my-2" th:object="${profile}">
+				<thead>
+					<tr>
+						<td><h5 class="text-center">Skill</h5></td>
+						<td><h5 class="text-center">Expertise</h5></td>
+					</tr>
+				</thead>
+  				<tbody>
+  					<tr th:each="skill : *{skills}">
+  						<td th:text="${skill.name}"></td>
+  						<td th:class="text-right" th:text="${skill.expertise}"></td>
+					</tr>
+  				</tbody>
+  			</table>
+             <div class="row w-fit-content mt-3 mx-auto">
+                <button class="btn btn-primary btn-lg" id="register">
+                <a th:href="@{__(${currentUser.username == 'admin' } ? '/admin/profile/edit(candidate=' +${profile.username} + ',skills=1)' : '/user/profile/edit(skills=1)')__}" class="text-decoration-none text-white">Edit Profile</a>
+                </button>
+            </div>   			
+        </div>	
+        
+        <div th:replace="fragments::javascripts"></div>
+    </body>
+</html>
