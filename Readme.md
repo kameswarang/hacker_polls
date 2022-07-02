@@ -12,15 +12,15 @@ Design & Develop a Polling system to vote and choose the best Hacker.
 
 Once clicked on Hacker’s name, it must  show candidate details. There must be a Vote Button clicking which must be considered as a vote
 
-###[Ideal expectation from the webapp]
+### [Ideal expectation from the webapp]
 
-** Frontend **
+**Frontend**
 
     Implement a frontend in React/Angular/Vue/HTML CSS. The Home Page must list Candidates Names. Once clicked, it must  show candidate details. There must be a Vote Button clicking which must be considered as a vote, The total votes must be shown for all the candidates & users should not be able to vote again.
     
     Candidates must also be able signup and register for the poll. But have a mechanism for Admin to review the profile and allow it to appear in polls.
 
-** Backend **
+**Backend**
 
     Implement a backend in .NET/Java/C#/NodeJS/Python. On the Admin side, make a call to Add, Edit & Delete a Candidate. Fetch the Candidate info & Total Votes from Backend for the end user.
 
